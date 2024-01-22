@@ -38,6 +38,11 @@ void AShopManager::BeginPlay()
 	{
 		GameMode->RegisterShopManager(this);
 	}	
+
+	for (int i = 0; i < InteractiveList.Num(); i++)
+	{
+		InteractiveList[i]->Initialize(this);
+	}
 }
 
 FCustomer AShopManager::FindCustomer(FName CustomerID, bool& Found)

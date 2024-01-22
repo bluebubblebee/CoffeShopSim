@@ -74,14 +74,11 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	FName ItemResult;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	//FName ItemNeeded;
 
-
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
-	FName ItemNeeded;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
-	FItem ItemProduced;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	//FItem ItemProduced;
 
 	FRecipe(){}
 };

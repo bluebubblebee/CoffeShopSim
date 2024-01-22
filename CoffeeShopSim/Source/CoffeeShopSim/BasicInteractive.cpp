@@ -3,7 +3,8 @@
 
 #include "BasicInteractive.h"
 #include "Components/BoxComponent.h"
-#include "CoffeeShopSimCharacter.h"
+#include "CoffeeShopSimGameMode.h"
+#include "CoffeeShopSimGameMode.h"
 
 
 ABasicInteractive::ABasicInteractive()
@@ -21,14 +22,18 @@ ABasicInteractive::ABasicInteractive()
 
 }
 
-
 void ABasicInteractive::BeginPlay()
 {
 	Super::BeginPlay();
 
-	LockInteractive = false;
-	
+	LockInteractive = false;	
 }
+
+void ABasicInteractive::Initialize(class AShopManager* Manager)
+{
+	ShopManager = Manager;
+}
+
 
 void ABasicInteractive::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult &SweepResult)

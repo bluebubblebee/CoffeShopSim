@@ -21,10 +21,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactive")
 	FName ItemID;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactive")
+	UPROPERTY(BlueprintReadWrite, Category = "Interactive")
 	FItem Item;
 
 public:
+
+	void Initialize(class AShopManager* Manager) override;
 
 	// Interaface
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Interact")

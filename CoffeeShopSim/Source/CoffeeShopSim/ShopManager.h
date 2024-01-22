@@ -31,6 +31,9 @@ public:
 	TArray<class ANPCCustomer*> CustomerPoolList;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Shop Manager")
+	TArray<class ABasicInteractive*> InteractiveList;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Shop Manager")
 	class ADoorInteractive* DoorInteractive;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Shop Manager")
@@ -47,9 +50,7 @@ public:
 	FCustomer FindCustomer(FName CustomerID, bool& Found);
 
 	UFUNCTION(BlueprintCallable, Category = "Customer Order")
-	FOrder FindCustomerOrder(FName OderID, bool& Found);
-
-	
+	FOrder FindCustomerOrder(FName OderID, bool& Found);	
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "Customer Order")

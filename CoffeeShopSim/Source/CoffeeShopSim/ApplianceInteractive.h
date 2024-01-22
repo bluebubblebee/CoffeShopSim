@@ -25,7 +25,6 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactive")
 	TArray<FName> RecipeIDList;
 
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactive")
 	TArray<FRecipe> RecipeList;
 

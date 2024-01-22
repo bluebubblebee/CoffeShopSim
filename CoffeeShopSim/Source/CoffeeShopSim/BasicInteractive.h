@@ -23,6 +23,8 @@ protected:
 	UPROPERTY(BlueprintReadWrite, Category = "Interactive")
 	class ACoffeeShopSimCharacter* PlayerCharacter;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Game Mode")
+	class AShopManager* ShopManager;
 
 protected:
 
@@ -36,6 +38,8 @@ public:
 
 	ABasicInteractive();
 
+	virtual void Initialize(class AShopManager* Manager);
+
 protected:
 
 	virtual void BeginPlay() override;
@@ -47,10 +51,8 @@ protected:
 		bool bFromSweep, const FHitResult &SweepResult);
 
 
-
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Interaction")
-	void OnPlayerEnterInteractive();
-	
+	void OnPlayerEnterInteractive();	
 
 	UFUNCTION()
 	virtual void EndOverlap(UPrimitiveComponent* OverlappedComp,

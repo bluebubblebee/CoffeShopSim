@@ -40,13 +40,11 @@ public:
 public:
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Interaction")
-	void OnEnterInteractive(AActor* InteractiveActor, FName InteractiveName);
-	
+	void OnEnterInteractive(AActor* InteractiveActor, FName InteractiveName);	
 	void OnEnterInteractive_Implementation(AActor* InteractiveActor, FName InteractiveName);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Interaction")
 	void OnLeaveInteractive();
-
 	void OnLeaveInteractive_Implementation();
 
 protected:
@@ -65,7 +63,6 @@ protected:
 
 	IInteractable* CurrentInteractive;
 
-
 public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interaction")
@@ -76,12 +73,10 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Interaction")
 	void OnReceiveItem(FItem Item);
-
 	void OnReceiveItem_Implementation(FItem Item);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Interaction")
 	void OnGiveItem();
-
 	void OnGiveItem_Implementation();
 
 
@@ -94,7 +89,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Order")
 	void OnOrderCompleted(int32 Coins);
-
 	void OnOrderCompleted_Implementation(int32 Coins);
 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Order")

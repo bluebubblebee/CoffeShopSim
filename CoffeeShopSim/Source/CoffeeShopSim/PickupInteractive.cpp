@@ -3,6 +3,19 @@
 
 #include "PickupInteractive.h"
 #include "CoffeeShopSimCharacter.h"
+#include "ShopManager.h"
+
+void APickupInteractive::Initialize(class AShopManager* Manager)
+{
+	Super::Initialize(Manager);
+
+	if (ShopManager != nullptr)
+	{
+		bool bFoundItem = false;
+		Item = ShopManager->FindItem(ItemID, bFoundItem);
+	}
+}
+
 
 void APickupInteractive::OnInteract_Implementation()
 {
@@ -16,6 +29,7 @@ void APickupInteractive::OnInteract_Implementation()
 		}
 		else
 		{
+
 			PlayerCharacter->OnReceiveItem(Item);
 
 			PlayerCharacter->ChangeAnimation("Idle");

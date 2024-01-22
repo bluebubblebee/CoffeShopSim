@@ -29,6 +29,8 @@ bool AApplianceInteractive::TryToSelectRecipe_Implementation()
 			{
 				if (Recipe.RequiredItems[i] == PlayerCharacter->ItemOnHands.ItemID)
 				{
+					RecipeSelected = Recipe;
+
 					PlayerCharacter->OnGiveItem();
 
 					PlayerCharacter->ChangeAnimation("Interact");
@@ -37,39 +39,7 @@ bool AApplianceInteractive::TryToSelectRecipe_Implementation()
 				}
 			}
 		}
-
-
-		/*if (RecipeList[i].ItemNeeded == PlayerCharacter->ItemOnHands.ItemID)
-		{
-			RecipeSelected = RecipeList[i];
-
-			PlayerCharacter->OnGiveItem();
-
-			PlayerCharacter->ChangeAnimation("Interact");
-
-			return true;
-
-		}*/
 	}
-
-
-	
-
-	// Check list of recipes and find the one that corresponds with items on hands
-	/*for (int i = 0; i < RecipeList.Num(); i++)
-	{
-		if (RecipeList[i].ItemNeeded == PlayerCharacter->ItemOnHands.ItemID)
-		{
-			RecipeSelected = RecipeList[i];
-
-			PlayerCharacter->OnGiveItem();
-
-			PlayerCharacter->ChangeAnimation("Interact");
-
-			return true;
-
-		}
-	}*/
 
 	return false;
 }
@@ -81,10 +51,18 @@ bool AApplianceInteractive::GiveRecipeToPlayer_Implementation()
 {	
 	if (PlayerCharacter == nullptr) return false;
 	
-	PlayerCharacter->OnReceiveItem(RecipeSelected.ItemProduced);
+	if (ShopManager == nullptr) return false;
+	
+	bool bItemFound = false;
+	FItem ItemResult = ShopManager->FindItem(RecipeSelected.ItemResult, bItemFound);
+	
+	if (bItemFound)
+	{
+		PlayerCharacter->OnReceiveItem(ItemResult);
+		PlayerCharacter->ChangeAnimation("Idle");
+		return true;
+	}
 
-	PlayerCharacter->ChangeAnimation("Idle");
-
-	return true;
+	return false;
 	
 }
