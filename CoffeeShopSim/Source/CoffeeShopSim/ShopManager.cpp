@@ -68,7 +68,7 @@ FOrder AShopManager::FindCustomerOrder(FName OderID, bool& Found)
 
 	if (ShopDatabase != nullptr)
 	{
-		for (int32 i = 0; i < ShopDatabase->CustomerList.Num(); i++)
+		for (int32 i = 0; i < ShopDatabase->OrderCustomerData.Num(); i++)
 		{
 			if (ShopDatabase->OrderCustomerData[i].OrderID == OderID)
 			{
@@ -132,7 +132,7 @@ void AShopManager::SetCurrentCustomer(class ANPCCustomer* Customer)
 		CurrentCustomerAtCounter->CustomerInfo = FindCustomer(CurrentCustomerAtCounter->CustomerID, bCustomerFound);
 
 		bool bOrderFound = false;
-		CurrentCustomerAtCounter->CustomerInfo = FindCustomer(CurrentCustomerAtCounter->CustomerOrderID, bOrderFound);
+		CurrentCustomerAtCounter->CurrentOrder = FindCustomerOrder(CurrentCustomerAtCounter->CustomerOrderID, bOrderFound);
 	}
 }
 
