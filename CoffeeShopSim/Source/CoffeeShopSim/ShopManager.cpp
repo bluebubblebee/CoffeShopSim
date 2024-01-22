@@ -3,6 +3,7 @@
 
 #include "ShopManager.h"
 #include "Kismet/GameplayStatics.h"
+#include "Definitions.h"
 #include "NPCCustomer.h"
 #include "CoffeeShopSimCharacter.h"
 #include "CoffeeShopSimGameMode.h"
@@ -39,9 +40,100 @@ void AShopManager::BeginPlay()
 	}	
 }
 
+FCustomer AShopManager::FindCustomer(FName CustomerID, bool& Found)
+{
+	Found = false;
+	FCustomer Customer;
+
+	if (ShopDatabase != nullptr)
+	{
+		for (int32 i = 0; i < ShopDatabase->CustomerList.Num(); i++)
+		{
+			if (ShopDatabase->CustomerList[i].CustomerID == CustomerID)
+			{
+				Found = true;
+				return ShopDatabase->CustomerList[i];
+			}
+		}
+	}
+
+	return Customer;
+}
+
+
+FOrder AShopManager::FindCustomerOrder(FName OderID, bool& Found)
+{
+	Found = false;
+	FOrder Order;
+
+	if (ShopDatabase != nullptr)
+	{
+		for (int32 i = 0; i < ShopDatabase->CustomerList.Num(); i++)
+		{
+			if (ShopDatabase->OrderCustomerData[i].OrderID == OderID)
+			{
+				Found = true;
+				return ShopDatabase->OrderCustomerData[i];
+			}
+		}
+	}
+
+	return Order;
+
+}
+
+FItem AShopManager::FindItem(FName ItemID, bool& Found)
+{
+	Found = false;
+	FItem Item;
+
+	if (ShopDatabase != nullptr)
+	{
+		for (int32 i = 0; i < ShopDatabase->ItemData.Num(); i++)
+		{
+			if (ShopDatabase->ItemData[i].ItemID == ItemID)
+			{
+				Found = true;
+				return  ShopDatabase->ItemData[i];
+			}
+		}
+	}
+
+	return Item;
+}
+
+FRecipe AShopManager::FindRecipe(FName RecipeID, bool& Found)
+{
+	Found = false;
+	FRecipe Recipe;
+
+	if (ShopDatabase != nullptr)
+	{
+		for (int32 i = 0; i < ShopDatabase->RecipeData.Num(); i++)
+		{
+			if (ShopDatabase->RecipeData[i].RecipeID == RecipeID)
+			{
+				Found = true;
+				return ShopDatabase->RecipeData[i];
+			}
+		}
+	}
+
+	return Recipe;
+}
+
 void AShopManager::SetCurrentCustomer(class ANPCCustomer* Customer)
 {
 	CurrentCustomerAtCounter = Customer;
+
+	if (CurrentCustomerAtCounter != nullptr)
+	{
+		bool bCustomerFound = false;
+		CurrentCustomerAtCounter->CustomerInfo = FindCustomer(CurrentCustomerAtCounter->CustomerID, bCustomerFound);
+
+		bool bOrderFound = false;
+		CurrentCustomerAtCounter->CustomerInfo = FindCustomer(CurrentCustomerAtCounter->CustomerOrderID, bOrderFound);
+	}
 }
 
 
@@ -74,10 +166,17 @@ bool AShopManager::CheckIfCurrentOrderCompleted(FName ItemID)
 	int Coins = 0;
 	for (int i = 0; i < CurrentCustomerAtCounter->CurrentOrder.OrderItems.Num(); i++)
 	{
-		if (CurrentCustomerAtCounter->CurrentOrder.OrderItems[i].Completed)
+		FItemOrder ItemOrder = CurrentCustomerAtCounter->CurrentOrder.OrderItems[i];
+		if (ItemOrder.Completed)
 		{
-			itemsCompleted++;
-			Coins += CurrentCustomerAtCounter->CurrentOrder.OrderItems[i].Coins;
+			bool bItemFound = false;
+			FItem Item = FindItem(ItemOrder.ItemID, bItemFound);
+
+			if (bItemFound)
+			{
+				itemsCompleted++;
+				Coins += Item.Price;
+			}
 		}
 	}
 

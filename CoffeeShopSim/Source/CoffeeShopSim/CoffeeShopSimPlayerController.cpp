@@ -26,7 +26,6 @@ void ACoffeeShopSimPlayerController::SetupInputComponent()
 	// set up gameplay key bindings
 	Super::SetupInputComponent();
 
-
 	InputComponent->BindAxis("MoveForward", this, &ACoffeeShopSimPlayerController::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &ACoffeeShopSimPlayerController::MoveRight);
 

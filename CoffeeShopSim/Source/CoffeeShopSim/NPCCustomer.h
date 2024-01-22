@@ -19,9 +19,15 @@ public:
 public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Cutomer Info")
-	FCustomer CustomerInfo;
+	FName CustomerID;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Cutomer Info")
+	FName CustomerOrderID;
+
+	UPROPERTY(BlueprintReadWrite, Category = "Cutomer Info")
+	FCustomer CustomerInfo;
+
+	UPROPERTY(BlueprintReadWrite, Category = "Cutomer Info")
 	FOrder CurrentOrder;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Cutomer Info")

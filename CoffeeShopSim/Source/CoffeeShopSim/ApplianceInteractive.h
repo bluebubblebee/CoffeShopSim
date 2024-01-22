@@ -17,6 +17,14 @@ class COFFEESHOPSIM_API AApplianceInteractive : public ABasicInteractive, public
 	GENERATED_BODY()
 
 protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactive")
+	class ACoffeeShopSimGameMode* MainGameMode;
+
+protected:
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactive")
+	TArray<FName> RecipeIDList;
+
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactive")
 	TArray<FRecipe> RecipeList;

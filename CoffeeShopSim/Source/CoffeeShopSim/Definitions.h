@@ -43,8 +43,16 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	TSubclassOf<class AActor> ItemClass;
 
-	FItem(){}
-	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	int32 Price;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	UTexture2D* ItemIcon;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	UTexture2D* ItemCompletedIcon;
+
+	FItem(){}	
 
 };
 
@@ -56,7 +64,18 @@ struct FRecipe
 public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	FName RecipeID;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	FText Name;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	TArray<FName> RequiredItems;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	FName ItemResult;
+
+
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	FName ItemNeeded;
@@ -95,7 +114,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	FName ItemID;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	UPROPERTY(BlueprintReadWrite, Category = "Item")
+	bool Completed;
+
+	/*UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	int32 Coins;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
@@ -104,11 +126,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	UTexture2D* ItemCompletedIcon;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
-	bool Completed;
+	;*/
 
 };
-
 
 USTRUCT(BlueprintType)
 struct FOrder
@@ -122,6 +142,28 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	TArray<FItemOrder> OrderItems;
+
+};
+
+UCLASS(BlueprintType)
+class UShopData : public UDataAsset
+{
+	GENERATED_BODY()
+
+public:
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ShopData")
+	TArray<FItem> ItemData;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ShopData")
+	TArray<FCustomer> CustomerList;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ShopData")
+	TArray<FRecipe> RecipeData;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ShopData")
+	TArray<FOrder> OrderCustomerData;
+	
 };
 
 /**

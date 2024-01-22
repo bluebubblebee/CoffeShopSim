@@ -19,6 +19,9 @@ class COFFEESHOPSIM_API APickupInteractive : public ABasicInteractive, public II
 public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactive")
+	FName ItemID;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactive")
 	FItem Item;
 
 public:

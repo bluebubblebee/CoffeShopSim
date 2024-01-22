@@ -18,6 +18,11 @@ protected:
 
 	virtual void BeginPlay() override;
 
+protected:
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Quest System")
+	class UShopData* ShopDatabase;
+
 public:
 	UPROPERTY(BlueprintReadWrite, Category = "Shop Manager")
 	class ACoffeeShopSimCharacter* Player;
@@ -33,8 +38,27 @@ public:
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "Customer Order")
+	FItem FindItem(FName ItemID, bool& Found);
+
+	UFUNCTION(BlueprintCallable, Category = "Customer Order")
+	FRecipe FindRecipe(FName RecipeID, bool& Found);
+
+	UFUNCTION(BlueprintCallable, Category = "Customer Order")
+	FCustomer FindCustomer(FName CustomerID, bool& Found);
+
+	UFUNCTION(BlueprintCallable, Category = "Customer Order")
+	FOrder FindCustomerOrder(FName OderID, bool& Found);
+
+	
+
+public:
+	UFUNCTION(BlueprintCallable, Category = "Customer Order")
 	void SetCurrentCustomer(class ANPCCustomer* Customer);
 
 	UFUNCTION(BlueprintCallable, Category = "Customer Order")
 	bool CheckIfCurrentOrderCompleted(FName ItemID);
+
+
+
+
 };

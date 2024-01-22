@@ -82,8 +82,6 @@ void ACoffeeShopSimCharacter::MoveRight(float Value)
 {
 	if (Value != 0.0f)
 	{
-
-
 		const FRotator Rotation = GetControlRotation();
 		const FRotator YawRotation(0, Rotation.Yaw, 0);
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
