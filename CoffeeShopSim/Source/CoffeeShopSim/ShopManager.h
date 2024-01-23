@@ -20,8 +20,11 @@ protected:
 
 protected:
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Quest System")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Shop Manager")
 	class UShopData* ShopDatabase;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Shop Manager")
+	class UCustomerData* CustomerDatabase;
 
 public:
 	UPROPERTY(BlueprintReadWrite, Category = "Shop Manager")
@@ -47,10 +50,16 @@ public:
 	FRecipe FindRecipe(FName RecipeID, bool& Found);
 
 	UFUNCTION(BlueprintCallable, Category = "Customer Order")
+	FRecipe FindRecipeByIngredients(const TArray<FRecipeIngredient>& IngredientList, ERecipeType RecipeType, bool& Found);
+	
+
+public:
+
+	UFUNCTION(BlueprintCallable, Category = "Customer Order")
 	FCustomer FindCustomer(FName CustomerID, bool& Found);
 
 	UFUNCTION(BlueprintCallable, Category = "Customer Order")
-	FOrder FindCustomerOrder(FName OderID, bool& Found);	
+	FOrder FindCustomerOrder(FName OderID, bool& Found);
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "Customer Order")
@@ -58,8 +67,4 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Customer Order")
 	bool CheckIfCurrentOrderCompleted(FName ItemID);
-
-
-
-
 };

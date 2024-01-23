@@ -12,22 +12,20 @@ void AApplianceInteractive::OnInteract_Implementation()
 
 bool AApplianceInteractive::TryToSelectRecipe_Implementation()
 {
-	MainGameMode = Cast<ACoffeeShopSimGameMode>(GetWorld()->GetAuthGameMode());
-
-	if ((MainGameMode == nullptr) || (MainGameMode->ShopManager == nullptr)) return false;
+	if (ShopManager == nullptr) return false;
 
 	if ((PlayerCharacter == nullptr) || (!PlayerCharacter->bHasItemOnHands)) return false;
 
 	for (int i = 0; i < RecipeIDList.Num(); i++)
 	{
 		bool bFoundRecipe = false;
-		FRecipe Recipe = MainGameMode->ShopManager->FindRecipe(RecipeIDList[i], bFoundRecipe);
+		FRecipe Recipe = ShopManager->FindRecipe(RecipeIDList[i], bFoundRecipe);
 
 		if (bFoundRecipe)
 		{
-			for (int j = 0; j < Recipe.RequiredItems.Num(); j++)
+			for (int j = 0; j < Recipe.RequiredIngredients.Num(); j++)
 			{
-				if (Recipe.RequiredItems[i] == PlayerCharacter->ItemOnHands.ItemID)
+				if (Recipe.RequiredIngredients[i].ID == PlayerCharacter->ItemOnHands.ItemID)
 				{
 					RecipeSelected = Recipe;
 
@@ -44,14 +42,15 @@ bool AApplianceInteractive::TryToSelectRecipe_Implementation()
 	return false;
 }
 
-
-
-
 bool AApplianceInteractive::GiveRecipeToPlayer_Implementation()
 {	
 	if (PlayerCharacter == nullptr) return false;
 	
-	if (ShopManager == nullptr) return false;
+	if (ShopManager == nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("[GiveRecipeToPlayer]: ShopManager hasn't been initialize for %s"), *InteractiveName.ToString());
+		return false;
+	}
 	
 	bool bItemFound = false;
 	FItem ItemResult = ShopManager->FindItem(RecipeSelected.ItemResult, bItemFound);
@@ -63,6 +62,5 @@ bool AApplianceInteractive::GiveRecipeToPlayer_Implementation()
 		return true;
 	}
 
-	return false;
-	
+	return false;	
 }

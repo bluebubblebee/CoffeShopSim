@@ -16,25 +16,17 @@ class COFFEESHOPSIM_API AApplianceInteractive : public ABasicInteractive, public
 {
 	GENERATED_BODY()
 
-protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactive")
-	class ACoffeeShopSimGameMode* MainGameMode;
 
 protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactive")
 	TArray<FName> RecipeIDList;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactive")
-	TArray<FRecipe> RecipeList;
-
 	UPROPERTY(BlueprintReadOnly, Category = "Interactive")
 	FRecipe RecipeSelected;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Interactive")
-	bool IsPlayingMinigame;
-
-	
+	bool IsPlayingMinigame;	
 
 public:
 
@@ -61,12 +53,10 @@ protected:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Interactive")
 	bool TryToSelectRecipe();
-
 	bool TryToSelectRecipe_Implementation();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Interactive")
 	bool GiveRecipeToPlayer();
-
 	bool GiveRecipeToPlayer_Implementation();
 
 };

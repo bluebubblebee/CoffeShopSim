@@ -25,6 +25,14 @@ enum class EOrderStatus : uint8
 	VE_OrderCompleted 		 UMETA(DisplayName = "OrderCompleted"),
 };
 
+UENUM(BlueprintType)
+enum class ERecipeType : uint8
+{
+	VE_Any 					 UMETA(DisplayName = "Any"),
+	VE_PrepareIngredient 	 UMETA(DisplayName = "Prepare Ingredient"),
+	VE_PrepareRecipe		 UMETA(DisplayName = "Prepare Recipe"),
+};
+
 
 //// Items ///////
 USTRUCT(BlueprintType)
@@ -53,6 +61,21 @@ public:
 	UTexture2D* ItemCompletedIcon;
 
 	FItem(){}	
+};
+
+
+USTRUCT(BlueprintType)
+struct FRecipeIngredient
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	FName ID;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	int32 Quantity;
 
 };
 
@@ -67,18 +90,16 @@ public:
 	FName RecipeID;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	ERecipeType RecipeType;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	FText Name;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
-	TArray<FName> RequiredItems;
+	FName ItemResult;	
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
-	FName ItemResult;
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
-	//FName ItemNeeded;
-
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
-	//FItem ItemProduced;
+	TArray<FRecipeIngredient> RequiredIngredients;
 
 	FRecipe(){}
 };
@@ -113,18 +134,6 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Category = "Item")
 	bool Completed;
-
-	/*UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
-	int32 Coins;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
-	UTexture2D* ItemIcon;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
-	UTexture2D* ItemCompletedIcon;
-
-	;*/
-
 };
 
 USTRUCT(BlueprintType)
@@ -153,14 +162,22 @@ public:
 	TArray<FItem> ItemData;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ShopData")
+	TArray<FRecipe> RecipeData;	
+};
+
+
+UCLASS(BlueprintType)
+class UCustomerData : public UDataAsset
+{
+	GENERATED_BODY()
+
+public:
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "CustomerData")
 	TArray<FCustomer> CustomerList;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ShopData")
-	TArray<FRecipe> RecipeData;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ShopData")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "CustomerData")
 	TArray<FOrder> OrderCustomerData;
-	
 };
 
 /**

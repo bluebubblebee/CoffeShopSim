@@ -50,14 +50,14 @@ FCustomer AShopManager::FindCustomer(FName CustomerID, bool& Found)
 	Found = false;
 	FCustomer Customer;
 
-	if (ShopDatabase != nullptr)
+	if (CustomerDatabase != nullptr)
 	{
-		for (int32 i = 0; i < ShopDatabase->CustomerList.Num(); i++)
+		for (int32 i = 0; i < CustomerDatabase->CustomerList.Num(); i++)
 		{
-			if (ShopDatabase->CustomerList[i].CustomerID == CustomerID)
+			if (CustomerDatabase->CustomerList[i].CustomerID == CustomerID)
 			{
 				Found = true;
-				return ShopDatabase->CustomerList[i];
+				return CustomerDatabase->CustomerList[i];
 			}
 		}
 	}
@@ -65,20 +65,19 @@ FCustomer AShopManager::FindCustomer(FName CustomerID, bool& Found)
 	return Customer;
 }
 
-
 FOrder AShopManager::FindCustomerOrder(FName OderID, bool& Found)
 {
 	Found = false;
 	FOrder Order;
 
-	if (ShopDatabase != nullptr)
+	if (CustomerDatabase != nullptr)
 	{
-		for (int32 i = 0; i < ShopDatabase->OrderCustomerData.Num(); i++)
+		for (int32 i = 0; i < CustomerDatabase->OrderCustomerData.Num(); i++)
 		{
-			if (ShopDatabase->OrderCustomerData[i].OrderID == OderID)
+			if (CustomerDatabase->OrderCustomerData[i].OrderID == OderID)
 			{
 				Found = true;
-				return ShopDatabase->OrderCustomerData[i];
+				return CustomerDatabase->OrderCustomerData[i];
 			}
 		}
 	}
@@ -104,6 +103,7 @@ FItem AShopManager::FindItem(FName ItemID, bool& Found)
 		}
 	}
 
+	UE_LOG(LogTemp, Warning, TEXT("[AShopManager::FindItem]: Unnable to find Item: %s"), *ItemID.ToString());
 	return Item;
 }
 
@@ -125,6 +125,43 @@ FRecipe AShopManager::FindRecipe(FName RecipeID, bool& Found)
 	}
 
 	return Recipe;
+}
+
+FRecipe AShopManager::FindRecipeByIngredients(const TArray<FRecipeIngredient>& IngredientList, ERecipeType RecipeType, bool& Found)
+{
+	Found = false;
+
+	if (ShopDatabase != nullptr)
+	{
+		for (int32 i = 0; i < ShopDatabase->RecipeData.Num(); i++)
+		{
+			int NumberIngredientsFound = 0;
+			if (ShopDatabase->RecipeData[i].RecipeType == RecipeType)
+			{
+				for (int32 j = 0; j < ShopDatabase->RecipeData[i].RequiredIngredients.Num(); j++)
+				{
+					FRecipeIngredient Ingredient = ShopDatabase->RecipeData[i].RequiredIngredients[j];
+					for (int32 z = 0; z < IngredientList.Num(); z++)
+					{
+						if ((Ingredient.ID == IngredientList[z].ID) && (Ingredient.Quantity >= IngredientList[z].Quantity))
+						{
+							NumberIngredientsFound++;
+							break;
+						}
+					}
+				}
+			}
+
+			if (NumberIngredientsFound == ShopDatabase->RecipeData[i].RequiredIngredients.Num())
+			{
+				Found = true;
+				return ShopDatabase->RecipeData[i];
+			}
+		}
+	}
+
+
+	return FRecipe();
 }
 
 void AShopManager::SetCurrentCustomer(class ANPCCustomer* Customer)
