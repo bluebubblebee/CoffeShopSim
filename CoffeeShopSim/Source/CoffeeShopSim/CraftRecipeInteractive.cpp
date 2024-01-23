@@ -2,6 +2,7 @@
 
 #include "CraftRecipeInteractive.h"
 #include "ShopManager.h"
+#include "CoffeeShopSimCharacter.h"
 
 
 bool ACraftRecipeInteractive::TryAddIngredients(const FItem& Item)
