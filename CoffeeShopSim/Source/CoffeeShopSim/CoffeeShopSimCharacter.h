@@ -79,6 +79,13 @@ public:
 	void OnGiveItem();
 	void OnGiveItem_Implementation();
 
+public:
+
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Order")
+	void OnOpenShop();
+
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Order")
+	void OnCloseShop();
 
 protected:
 
