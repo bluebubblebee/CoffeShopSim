@@ -9,6 +9,7 @@ public class CoffeeShopSimTarget : TargetRules
 	{
 		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
+		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_0;
 		ExtraModuleNames.Add("CoffeeShopSim");
 	}
 }

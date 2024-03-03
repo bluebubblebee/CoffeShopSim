@@ -93,31 +93,107 @@ void ACoffeeShopSimCharacter::MoveRight(float Value)
 
 void ACoffeeShopSimCharacter::Interact()
 {
-	if (CurrentInteractive != nullptr)
+	if (CurrentInteractiveActor != nullptr)
 	{
 		// Execute the interact event
+		UE_LOG(LogTemp, Warning, TEXT("[Interact]: %s"), *CurrentInteractiveActor->GetName());
 		IInteractable::Execute_OnInteract(CurrentInteractiveActor);
-	}
+	}	
 }
 
 void ACoffeeShopSimCharacter::OnEnterInteractive_Implementation(AActor* InteractiveActor, FName InteractiveName)
-{
-	if (InteractiveActor != nullptr)
-	{
-		bool IsInterface = UKismetSystemLibrary::DoesImplementInterface(InteractiveActor, UInteractable::StaticClass());
-		if (IsInterface)
-		{
-			CurrentInteractiveActor = InteractiveActor;
+{	
+	if (InteractiveActor == nullptr) return;
 
-			CurrentInteractive = Cast<IInteractable>(InteractiveActor);
+	UE_LOG(LogTemp, Warning, TEXT("[OnEnterInteractive] Called: %s"), *InteractiveName.ToString());
+	
+	bool bIsInteractive = UKismetSystemLibrary::DoesImplementInterface(InteractiveActor, UInteractable::StaticClass());
+	if (bIsInteractive)
+	{
+		InteractiveList.AddUnique(InteractiveActor);
+		if (InteractiveList.Num() == 1)
+		{
+			SetCurrentInteractive(InteractiveActor);
 		}
-	}
+
+		UE_LOG(LogTemp, Warning, TEXT("[OnEnterInteractive] InteractiveActor %s IsInteractive - InteractiveList.Num():%d"), *InteractiveActor->GetName(), InteractiveList.Num());
+
+		for (int i = 0; i < InteractiveList.Num(); i++)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("[OnEnterInteractive] InteractiveList[i]: %s"), *InteractiveList[i]->GetName());
+		}
+
+		//CurrentInteractiveActor = InteractiveActor;
+		//CurrentInteractive = Cast<IInteractable>(InteractiveActor);
+	}	
 }
 
-void ACoffeeShopSimCharacter::OnLeaveInteractive_Implementation()
+void ACoffeeShopSimCharacter::OnLeaveInteractive_Implementation(class AActor* InteractiveActor)
+{	
+
+	if (InteractiveActor == nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("[OnLeaveInteractive] InteractiveActor is null"));
+		return;
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("[OnLeaveInteractive] Leaving...: %s"), *InteractiveActor->GetName());
+
+	for (int i = 0; i < InteractiveList.Num(); i++)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("[OnLeaveInteractive] InteractiveList[i]: %s"), *InteractiveList[i]->GetName());
+
+		if (InteractiveList[i] == InteractiveActor)
+		{
+			if (CurrentInteractiveActor == InteractiveActor)
+			{
+				if (1 < InteractiveList.Num())
+				{
+					if (i == 0)
+					{
+						SetCurrentInteractive(InteractiveList[1]);
+					}
+					else
+					{
+						SetCurrentInteractive(InteractiveList[i - 1]);
+					}
+				}
+			}
+
+			InteractiveList.RemoveAt(i);
+
+			break;
+		}
+
+	}
+
+	if (0 == InteractiveList.Num())
+	{
+		SetCurrentInteractive(nullptr);		
+	}
+
+	for (int i = 0; i < InteractiveList.Num(); i++)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("[OnLeaveInteractive] - END InteractiveList[i]: %s"), *InteractiveList[i]->GetName());
+	}
+
+	//CurrentInteractive = nullptr;
+	//CurrentInteractiveActor = nullptr;
+}
+
+void ACoffeeShopSimCharacter::SetCurrentInteractive(AActor* NewInteractive)
 {
-	CurrentInteractive = nullptr;
-	CurrentInteractiveActor = nullptr;
+	CurrentInteractiveActor = NewInteractive;
+
+	if (NewInteractive != nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("[SetCurrentInteractive]: %s"), *NewInteractive->GetName());
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("[SetCurrentInteractive] NewInteractive is Null "));
+	}
+	
 }
 
 

@@ -44,8 +44,8 @@ public:
 	void OnEnterInteractive_Implementation(AActor* InteractiveActor, FName InteractiveName);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Interaction")
-	void OnLeaveInteractive();
-	void OnLeaveInteractive_Implementation();
+	void OnLeaveInteractive(class AActor* InteractiveActor);
+	void OnLeaveInteractive_Implementation(class AActor* InteractiveActor);
 
 protected:
 
@@ -58,10 +58,15 @@ public:
 
 protected:
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactive")
+	TArray<TObjectPtr<class AActor>> InteractiveList;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
 	AActor* CurrentInteractiveActor;
 
-	IInteractable* CurrentInteractive;
+	//IInteractable* CurrentInteractive;	
+
+	void SetCurrentInteractive(AActor* NewInteractive);
 
 public:
 
