@@ -16,7 +16,7 @@ public:
 
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Game Mode")
-	class AShopManager* ShopManager;
+	TObjectPtr<class AShopManager> ShopManager;
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "Game Mode")

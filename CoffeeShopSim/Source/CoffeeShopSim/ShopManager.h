@@ -21,14 +21,14 @@ protected:
 protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Shop Manager")
-	class UShopData* ShopDatabase;
+	TObjectPtr<class UShopData> ShopDatabase;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Shop Manager")
-	class UCustomerData* CustomerDatabase;
+	TObjectPtr<class UCustomerData> CustomerDatabase;
 
 public:
 	UPROPERTY(BlueprintReadWrite, Category = "Shop Manager")
-	class ACoffeeShopSimCharacter* Player;
+	TObjectPtr<class ACoffeeShopSimCharacter> Player;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Shop Manager")
 	TArray<class ANPCCustomer*> CustomerPoolList;
@@ -37,10 +37,10 @@ public:
 	TArray<class ABasicInteractive*> InteractiveList;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Shop Manager")
-	class ADoorInteractive* DoorInteractive;
+	TObjectPtr<class ADoorInteractive> DoorInteractive;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Shop Manager")
-	class ANPCCustomer* CurrentCustomerAtCounter;	
+	TObjectPtr<class ANPCCustomer> CurrentCustomerAtCounter;
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "Customer Order")
