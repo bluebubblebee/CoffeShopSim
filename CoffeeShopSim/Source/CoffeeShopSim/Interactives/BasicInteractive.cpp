@@ -3,8 +3,8 @@
 
 #include "BasicInteractive.h"
 #include "Components/BoxComponent.h"
-#include "CoffeeShopSimGameMode.h"
-#include "CoffeeShopSimGameMode.h"
+#include "CoffeeShopSim/CoffeeShopSimGameMode.h"
+#include "CoffeeShopSim/CoffeeShopSimGameMode.h"
 
 
 ABasicInteractive::ABasicInteractive()

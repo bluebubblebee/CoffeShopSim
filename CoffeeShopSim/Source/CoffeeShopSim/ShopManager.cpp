@@ -7,7 +7,7 @@
 #include "NPCCustomer.h"
 #include "CoffeeShopSimCharacter.h"
 #include "CoffeeShopSimGameMode.h"
-#include "DoorInteractive.h"
+#include "CoffeeShopSim/Interactives/DoorInteractive.h"
 
 AShopManager::AShopManager()
 {

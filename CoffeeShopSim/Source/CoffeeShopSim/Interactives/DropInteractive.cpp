@@ -2,7 +2,7 @@
 
 
 #include "DropInteractive.h"
-#include "CoffeeShopSimCharacter.h"
+#include "CoffeeShopSim/CoffeeShopSimCharacter.h"
 
 void ADropInteractive::OnInteract_Implementation()
 {

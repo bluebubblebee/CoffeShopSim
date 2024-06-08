@@ -26,7 +26,12 @@ public:
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Save System")
 	FSaveSubsystemLoadAllSaveGames LoadAllSaveGamesCompleted;
 
-	void LoadSaveGames();
+
+	UFUNCTION(BlueprintCallable, Category = "Save System")
+	void CreateNewSaveGame();
+
+	UFUNCTION(BlueprintCallable, Category = "Save System")
+	void LoadSaveGames();	
 
 public:
 
@@ -43,9 +48,10 @@ private:
 	int32 CurrentUserIndex = 0;
 	int32 NextSlotToLoad = 0;
 
-	UPROPERTY()
-	TArray<TObjectPtr<UMainSaveGame>> SaveGameList;
-
 	TArray<FString> SaveGameSlotToLoad;
+
+public:
+	UPROPERTY(BlueprintReadOnly, Category = "Save System")
+	TArray<TObjectPtr<UMainSaveGame>> SaveGameList;
 	
 };

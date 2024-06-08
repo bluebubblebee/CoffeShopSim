@@ -32,6 +32,11 @@ void USaveSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 	UE_LOG(LogTemp, Warning, TEXT("[USaveSubsystem::Initialize] Number Savegames %d "), SaveGameSlotToLoad.Num());
 }
 
+void USaveSubsystem::CreateNewSaveGame()
+{
+
+}
+
 void USaveSubsystem::LoadSaveGames()
 {
 	NextSlotToLoad = 0;

@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "Interactable.h"
+#include "CoffeeShopSim/Interactives/Interactable.h"
 #include "Definitions.h"
 #include "CoffeeShopSimCharacter.generated.h"
 

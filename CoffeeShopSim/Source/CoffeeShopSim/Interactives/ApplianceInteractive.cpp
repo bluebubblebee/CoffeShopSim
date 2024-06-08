@@ -2,9 +2,9 @@
 
 
 #include "ApplianceInteractive.h"
-#include "CoffeeShopSimCharacter.h"
-#include "ShopManager.h"
-#include "CoffeeShopSimGameMode.h"
+#include "CoffeeShopSim/CoffeeShopSimCharacter.h"
+#include "CoffeeShopSim/ShopManager.h"
+#include "CoffeeShopSim/CoffeeShopSimGameMode.h"
 
 void AApplianceInteractive::OnInteract_Implementation()
 {	
