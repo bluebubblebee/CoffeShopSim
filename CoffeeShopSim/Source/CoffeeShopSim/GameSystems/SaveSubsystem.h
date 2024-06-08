@@ -43,6 +43,9 @@ protected:
 	UFUNCTION()
 	void HandleLoadSaveSaveGameCompleted(const FString& SlotName, const int32 UserIndex, USaveGame* LoadedGameData);
 
+	UFUNCTION()
+	void HandleCreateNewGameCompleted(const FString& SlotName, const int32 UserIndex, bool bSuccess);
+
 private:
 
 	int32 CurrentUserIndex = 0;
@@ -52,6 +55,8 @@ private:
 
 public:
 	UPROPERTY(BlueprintReadOnly, Category = "Save System")
-	TArray<TObjectPtr<UMainSaveGame>> SaveGameList;
-	
+	TArray<TObjectPtr<UMainSaveGame>> SaveGameList;	
+
+	UPROPERTY(BlueprintReadOnly, Category = "Save System")
+	TObjectPtr<UMainSaveGame> LastSaveGameCreated;
 };

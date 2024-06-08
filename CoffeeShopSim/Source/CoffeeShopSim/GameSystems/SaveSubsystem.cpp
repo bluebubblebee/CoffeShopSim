@@ -15,30 +15,83 @@ void USaveSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 	UE_LOG(LogTemp, Warning, TEXT("[USaveSubsystem::Initialize] Called"));
 
 	Super::Initialize(Collection);
+}
 
+void USaveSubsystem::CreateNewSaveGame()
+{
+	// Find the next available save game 
+	FString NextAvailableSaveGame;
+	bool bFound = false;
+	for (int i = 0; i < MaxSaveGames; i++)
+	{
+		FString intToString = FString::FromInt(i);
+		FString SaveGame = SAVE_DATA + intToString;
+
+		if (!UGameplayStatics::DoesSaveGameExist(SaveGame, CurrentUserIndex))
+		{
+			bFound = true;
+			NextAvailableSaveGame = SaveGame;
+			break;
+		}
+	}
+
+	if (!bFound)
+	{
+		SaveGameCreatedCompleted.Broadcast(false);
+		return;
+	}
+
+	// Create the save game
+	LastSaveGameCreated = Cast<UMainSaveGame>(UGameplayStatics::CreateSaveGameObject(UMainSaveGame::StaticClass()));
+	if (LastSaveGameCreated)
+	{
+		LastSaveGameCreated->SaveGameName = NextAvailableSaveGame;
+		LastSaveGameCreated->CreationTime = FDateTime::Now();
+		LastSaveGameCreated->Level = 1;
+		LastSaveGameCreated->Coins = FMath::RandRange(10, 300);
+
+		// Async save the new save game
+		FAsyncSaveGameToSlotDelegate SavedDelegate;
+		SavedDelegate.BindUObject(this, &USaveSubsystem::HandleCreateNewGameCompleted);
+		UGameplayStatics::AsyncSaveGameToSlot(LastSaveGameCreated, NextAvailableSaveGame, CurrentUserIndex, SavedDelegate);
+	}
+	else
+	{
+		SaveGameCreatedCompleted.Broadcast(false);
+	}
+}
+
+void USaveSubsystem::HandleCreateNewGameCompleted(const FString& SlotName, const int32 UserIndex, bool bSuccess)
+{
+	if (bSuccess)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("[USaveSystemSubsystem::HandleCreateNewGameCompleted] CREATED  %s - UserIndex: %d"), *SlotName, UserIndex);
+		SaveGameCreatedCompleted.Broadcast(true);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("[USaveSystemSubsystem::HandleCreateNewGameCompleted] NOT CREATED %s - UserIndex: %d"), *SlotName, UserIndex);
+		SaveGameCreatedCompleted.Broadcast(false);
+	}
+}
+
+void USaveSubsystem::LoadSaveGames()
+{
 	SaveGameList.Empty();
 	SaveGameSlotToLoad.Empty();
 	for (int i = 0; i < MaxSaveGames; i++)
 	{
 		FString intToString = FString::FromInt(i);
-		FString SlotIndex = SAVE_DATA + intToString;
+		FString SaveGameName = SAVE_DATA + intToString;
 
-		if (UGameplayStatics::DoesSaveGameExist(SlotIndex, CurrentUserIndex))
+		if (UGameplayStatics::DoesSaveGameExist(SaveGameName, CurrentUserIndex))
 		{
-			SaveGameSlotToLoad.Add(SlotIndex);
+			SaveGameSlotToLoad.Add(SaveGameName);
 		}
 	}
 
 	UE_LOG(LogTemp, Warning, TEXT("[USaveSubsystem::Initialize] Number Savegames %d "), SaveGameSlotToLoad.Num());
-}
 
-void USaveSubsystem::CreateNewSaveGame()
-{
-
-}
-
-void USaveSubsystem::LoadSaveGames()
-{
 	NextSlotToLoad = 0;
 	if (SaveGameSlotToLoad.Num() == 0)
 	{
