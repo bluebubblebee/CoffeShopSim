@@ -9,6 +9,7 @@ public class CoffeeShopSimEditorTarget : TargetRules
 	{
 		Type = TargetType.Editor;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
-		ExtraModuleNames.Add("CoffeeShopSim");
+		bOverrideBuildEnvironment = true;
+        ExtraModuleNames.Add("CoffeeShopSim");
 	}
 }
