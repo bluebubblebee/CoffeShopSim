@@ -18,20 +18,22 @@ class COFFEESHOPSIM_API USaveSubsystem : public UGameInstanceSubsystem
 
 public:
 	USaveSubsystem();
-	virtual void Initialize(FSubsystemCollectionBase& Collection);
+	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 
+public:
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Save System")
 	FSaveSubsystemSaveGameCreated SaveGameCreatedCompleted;
-	
-	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Save System")
-	FSaveSubsystemLoadAllSaveGames LoadAllSaveGamesCompleted;
-
 
 	UFUNCTION(BlueprintCallable, Category = "Save System")
 	void CreateNewSaveGame();
 
+public:
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Save System")
+	FSaveSubsystemLoadAllSaveGames LoadAllSaveGamesCompleted;
+
 	UFUNCTION(BlueprintCallable, Category = "Save System")
-	void LoadSaveGames();	
+	void LoadSaveGames();
 
 public:
 
@@ -55,7 +57,7 @@ private:
 
 public:
 	UPROPERTY(BlueprintReadOnly, Category = "Save System")
-	TArray<TObjectPtr<UMainSaveGame>> SaveGameList;	
+	TArray<TObjectPtr<UMainSaveGame>> SaveGameList;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Save System")
 	TObjectPtr<UMainSaveGame> LastSaveGameCreated;
