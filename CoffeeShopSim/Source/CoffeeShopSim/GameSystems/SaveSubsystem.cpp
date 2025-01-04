@@ -35,6 +35,7 @@ void USaveSubsystem::CreateNewSaveGame()
 		}
 	}
 
+	// No save game available, return the function early
 	if (!bFound)
 	{
 		SaveGameCreatedCompleted.Broadcast(false);
@@ -57,6 +58,7 @@ void USaveSubsystem::CreateNewSaveGame()
 	}
 	else
 	{
+		// Call the event with false if anything went wrong with the creation
 		SaveGameCreatedCompleted.Broadcast(false);
 	}
 }
@@ -107,27 +109,24 @@ void USaveSubsystem::LoadSaveGames()
 
 void USaveSubsystem::HandleLoadSaveSaveGameCompleted(const FString& SlotName, const int32 UserIndex, USaveGame* LoadedGameData)
 {
-	if (LoadedGameData != nullptr)
+	if (LoadedGameData == nullptr)
 	{
-		UMainSaveGame* GameData = Cast<UMainSaveGame>(LoadedGameData);
-		SaveGameList.Add(GameData);
+		LoadAllSaveGamesCompleted.Broadcast(false);
+		return;
+	}
+	
+	UMainSaveGame* GameData = Cast<UMainSaveGame>(LoadedGameData);
+	SaveGameList.Add(GameData);
 
-		NextSlotToLoad += 1;
-		if (NextSlotToLoad < SaveGameSlotToLoad.Num())
-		{
-			FAsyncLoadGameFromSlotDelegate LoadedDelegate;
-
-			LoadedDelegate.BindUObject(this, &USaveSubsystem::HandleLoadSaveSaveGameCompleted);
-
-			UGameplayStatics::AsyncLoadGameFromSlot(SaveGameSlotToLoad[NextSlotToLoad], CurrentUserIndex, LoadedDelegate);
-		}
-		else
-		{
-			LoadAllSaveGamesCompleted.Broadcast(true);
-		}
+	NextSlotToLoad += 1;
+	if (NextSlotToLoad < SaveGameSlotToLoad.Num())
+	{
+		FAsyncLoadGameFromSlotDelegate LoadedDelegate;
+		LoadedDelegate.BindUObject(this, &USaveSubsystem::HandleLoadSaveSaveGameCompleted);
+		UGameplayStatics::AsyncLoadGameFromSlot(SaveGameSlotToLoad[NextSlotToLoad], CurrentUserIndex, LoadedDelegate);
 	}
 	else
 	{
-		LoadAllSaveGamesCompleted.Broadcast(false);
-	}
+		LoadAllSaveGamesCompleted.Broadcast(true);
+	}	
 }

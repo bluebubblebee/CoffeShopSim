@@ -43,10 +43,10 @@ public:
 protected:
 
 	UFUNCTION()
-	void HandleLoadSaveSaveGameCompleted(const FString& SlotName, const int32 UserIndex, USaveGame* LoadedGameData);
-
-	UFUNCTION()
 	void HandleCreateNewGameCompleted(const FString& SlotName, const int32 UserIndex, bool bSuccess);
+	
+	UFUNCTION()
+	void HandleLoadSaveSaveGameCompleted(const FString& SlotName, const int32 UserIndex, USaveGame* LoadedGameData);	
 
 private:
 

@@ -120,9 +120,6 @@ void ACoffeeShopSimCharacter::OnEnterInteractive_Implementation(AActor* Interact
 		{
 			UE_LOG(LogTemp, Warning, TEXT("[OnEnterInteractive] InteractiveList[i]: %s"), *InteractiveList[i]->GetName());
 		}
-
-		//CurrentInteractiveActor = InteractiveActor;
-		//CurrentInteractive = Cast<IInteractable>(InteractiveActor);
 	}	
 }
 
