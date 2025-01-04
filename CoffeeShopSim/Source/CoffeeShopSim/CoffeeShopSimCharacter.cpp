@@ -10,9 +10,7 @@
 #include "Materials/Material.h"
 #include "Engine/World.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "Kismet/GameplayStatics.h"
 #include "CharacterAnimInstance.h"
-
 
 ACoffeeShopSimCharacter::ACoffeeShopSimCharacter()
 {
@@ -122,9 +120,6 @@ void ACoffeeShopSimCharacter::OnEnterInteractive_Implementation(AActor* Interact
 		{
 			UE_LOG(LogTemp, Warning, TEXT("[OnEnterInteractive] InteractiveList[i]: %s"), *InteractiveList[i]->GetName());
 		}
-
-		//CurrentInteractiveActor = InteractiveActor;
-		//CurrentInteractive = Cast<IInteractable>(InteractiveActor);
 	}	
 }
 

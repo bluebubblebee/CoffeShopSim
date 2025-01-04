@@ -8,8 +8,10 @@ public class CoffeeShopSimTarget : TargetRules
 	public CoffeeShopSimTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Game;
-		DefaultBuildSettings = BuildSettingsVersion.V2;
-		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_0;
-		ExtraModuleNames.Add("CoffeeShopSim");
+        DefaultBuildSettings = BuildSettingsVersion.V5;
+        IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_5;
+		bOverrideBuildEnvironment = true;
+        CppStandard = CppStandardVersion.Cpp20;
+        ExtraModuleNames.Add("CoffeeShopSim");
 	}
 }

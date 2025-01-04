@@ -5,34 +5,34 @@
 #include "CoreMinimal.h"
 #include "BasicInteractive.h"
 #include "Interactable.h"
-#include "Definitions.h"
-#include "DropInteractive.generated.h"
+#include "CoffeeShopSim/Definitions.h"
+#include "PickupInteractive.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class COFFEESHOPSIM_API ADropInteractive : public ABasicInteractive, public IInteractable
+class COFFEESHOPSIM_API APickupInteractive : public ABasicInteractive, public IInteractable
 {
 	GENERATED_BODY()
 
-protected:
+public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactive")
-	int32 MaxItems;
+	FName ItemID;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactive")
-	TArray<FItem> ItemsOnInteractive;
-
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "WorkStation")
-	void OnItemDropped(const FItem& Item);
+	UPROPERTY(BlueprintReadWrite, Category = "Interactive")
+	FItem Item;
 
 public:
+
+	void Initialize(class AShopManager* Manager) override;
 
 	// Interaface
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Interact")
 	void OnInteract();
 
 	//Actual implementation of the Interact event
-	void OnInteract_Implementation();	
+	void OnInteract_Implementation();
+	
 };

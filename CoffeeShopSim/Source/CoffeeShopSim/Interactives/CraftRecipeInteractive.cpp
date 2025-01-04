@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "CraftRecipeInteractive.h"
-#include "ShopManager.h"
-#include "CoffeeShopSimCharacter.h"
+#include "CoffeeShopSim/ShopManager.h"
+#include "CoffeeShopSim/CoffeeShopSimCharacter.h"
 
 
 bool ACraftRecipeInteractive::TryAddIngredients(const FItem& Item)
