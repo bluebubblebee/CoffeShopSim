@@ -3,10 +3,10 @@
 
 #include "ShopManager.h"
 #include "Kismet/GameplayStatics.h"
-#include "Definitions.h"
-#include "NPCCustomer.h"
-#include "CoffeeShopSimCharacter.h"
-#include "CoffeeShopSimGameMode.h"
+#include "CoffeeShopSim/Common/Definitions.h"
+#include "CoffeeShopSim/NPC/NPCCustomer.h"
+#include "CoffeeShopSim/CoffeeShopSimCharacter.h"
+#include "CoffeeShopSim/CoffeeShopSimGameMode.h"
 #include "CoffeeShopSim/Interactives/DoorInteractive.h"
 
 AShopManager::AShopManager()

@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "BasicInteractive.h"
 #include "Interactable.h"
-#include "CoffeeShopSim/Definitions.h"
+#include "CoffeeShopSim/Common/Definitions.h"
 #include "CraftRecipeInteractive.generated.h"
 
 /**

@@ -10,7 +10,7 @@
 #include "Materials/Material.h"
 #include "Engine/World.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "CharacterAnimInstance.h"
+#include "Common/CharacterAnimInstance.h"
 
 ACoffeeShopSimCharacter::ACoffeeShopSimCharacter()
 {

@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "Definitions.h"
+#include "CoffeeShopSim/Common/Definitions.h"
 #include "NPCCustomer.generated.h"
 
 UCLASS()

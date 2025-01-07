@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "CraftRecipeInteractive.h"
-#include "CoffeeShopSim/ShopManager.h"
+#include "CoffeeShopSim/Shop/ShopManager.h"
 #include "CoffeeShopSim/CoffeeShopSimCharacter.h"
 
 

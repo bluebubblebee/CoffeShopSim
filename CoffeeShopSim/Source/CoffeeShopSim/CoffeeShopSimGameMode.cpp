@@ -2,9 +2,6 @@
 
 #include "CoffeeShopSimGameMode.h"
 #include "CoffeeShopSimPlayerController.h"
-#include "CoffeeShopSimCharacter.h"
-
-#include "ShopManager.h"
 #include "UObject/ConstructorHelpers.h"
 
 ACoffeeShopSimGameMode::ACoffeeShopSimGameMode()

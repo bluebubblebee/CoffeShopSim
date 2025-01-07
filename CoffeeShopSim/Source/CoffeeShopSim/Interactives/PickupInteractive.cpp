@@ -3,7 +3,7 @@
 
 #include "PickupInteractive.h"
 #include "CoffeeShopSim/CoffeeShopSimCharacter.h"
-#include "CoffeeShopSim/ShopManager.h"
+#include "CoffeeShopSim/Shop/ShopManager.h"
 
 void APickupInteractive::Initialize(class AShopManager* Manager)
 {
