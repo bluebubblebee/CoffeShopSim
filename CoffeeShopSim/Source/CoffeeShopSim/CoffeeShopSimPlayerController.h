@@ -13,24 +13,55 @@ class ACoffeeShopSimPlayerController : public APlayerController
 
 public:
 	ACoffeeShopSimPlayerController();
-
 	virtual void BeginPlay() override;
 
 protected:
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	class UInputControllerComponent* InputControllerComponent;
+	
+protected:
 
-	virtual void SetupInputComponent() override;
+	UFUNCTION()
+	void OnControllerChanged(EInputController NewInputController);
 
 	UFUNCTION(BlueprintCallable, Category = "Input")
-	void MoveForward(float Value);
-
-	UFUNCTION(BlueprintCallable, Category = "Input")
-	void MoveRight(float Value);
+	void HandleMovement(const FVector2D& Value);	
 
 	UFUNCTION(BlueprintCallable, Category = "Inputs")
-	void Interact();
+	void HandleFaceTopButton();
+	
+	UFUNCTION(BlueprintCallable, Category = "Inputs")
+	void HandleFaceRightButton();
+	
+	UFUNCTION(BlueprintCallable, Category = "Inputs")
+	void HandleFaceBottomButton();
 
+	UFUNCTION(BlueprintCallable, Category = "Inputs")
+	void HandleFaceLeftButton();
 
+	UFUNCTION(BlueprintCallable, Category = "Inputs")
+	void HandleInputDirection(EKeyDirection Direction);	
+
+	UFUNCTION(BlueprintCallable, Category = "Input")
+	void HandleMainMenuButtonInGame();
+	
+	UFUNCTION(BlueprintCallable, Category = "Input")
+    void HandleRightShoulderButtonInGame();
+
+    UFUNCTION(BlueprintCallable, Category = "Input")
+    void HandleLeftShoulderButtonInGame();
+
+    
+
+public:
+	UFUNCTION(BlueprintCallable, Category = "Input")
+	void ChangeMappingContextToInGame();
+
+	UFUNCTION(BlueprintCallable, Category = "Input")
+	void ChangeMappingContextToMenu();
+	
+	
 public:
 
 	UFUNCTION(BlueprintCallable, Category = "Input")
@@ -45,6 +76,9 @@ protected:
 	class ACoffeeShopSimCharacter* MyCharacter;
 
 	bool bIsInputLocked;
+
+	UPROPERTY(BlueprintReadWrite, Category = "References")
+	TObjectPtr<class AShopSimHUD> HUD;
 	
 };
 

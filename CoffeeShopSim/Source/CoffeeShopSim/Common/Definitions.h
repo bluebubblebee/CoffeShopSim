@@ -5,6 +5,21 @@
 #include "CoreMinimal.h"
 #include "Definitions.generated.h"
 
+UENUM(BlueprintType)
+enum class EPlatformType : uint8
+{
+	VE_NONE					UMETA(DisplayName = "None"),
+	VE_WINDOWS				UMETA(DisplayName = "Windows"),	            
+	VE_STEAM_DECK			UMETA(DisplayName = "SteamDeck"),
+};
+
+UENUM(BlueprintType)
+enum class EGameMenuType : uint8
+{
+	VE_NONE						    UMETA(DisplayName = "None"),
+	VE_MAIN_MENU					UMETA(DisplayName = "Main Menu")
+};
+
 
 UENUM(BlueprintType)
 enum class ECustomerStatus : uint8

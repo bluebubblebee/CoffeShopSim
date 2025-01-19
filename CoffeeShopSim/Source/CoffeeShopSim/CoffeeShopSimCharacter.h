@@ -31,9 +31,9 @@ private:
 
 public:
 
-	void MoveForward(float Value);
-	void MoveRight(float Value);
-
+	//void MoveForward(float Value);
+	//void MoveRight(float Value);
+	void MoveInput(const FVector2D& Value);
 	void Interact();
 
 public:

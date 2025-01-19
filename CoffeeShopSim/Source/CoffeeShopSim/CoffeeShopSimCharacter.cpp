@@ -10,7 +10,9 @@
 #include "Materials/Material.h"
 #include "Engine/World.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "Common/CharacterAnimInstance.h"
+#include "Interactives/Interactable.h"
 
 ACoffeeShopSimCharacter::ACoffeeShopSimCharacter()
 {
@@ -63,8 +65,27 @@ void ACoffeeShopSimCharacter::Tick(float DeltaSeconds)
     Super::Tick(DeltaSeconds);
 }
 
+void ACoffeeShopSimCharacter::MoveInput(const FVector2D& Value)
+{
+	if (Controller == NULL)
+	{
+		return;
+	}
 
-void ACoffeeShopSimCharacter::MoveForward(float Value)
+	const FVector2D MovementVector = Value;
+	FRotator RightRotation = Controller->GetControlRotation();
+	RightRotation.Pitch = 0.0f;
+	const FVector RightVector = UKismetMathLibrary::GetRightVector(RightRotation);
+	AddMovementInput(RightVector, MovementVector.X);
+
+	FRotator ForwardRotation = Controller->GetControlRotation();
+	ForwardRotation.Roll = 0.0f;
+	ForwardRotation.Pitch = 0.0f;
+	const FVector ForwardVector = UKismetMathLibrary::GetForwardVector(ForwardRotation);
+	AddMovementInput(ForwardVector, MovementVector.Y);
+}
+/*
+void ACoffeeShopSimCharacter::MoveForward(const float Value)
 {
 	if (Value != 0.0f)
 	{
@@ -87,7 +108,7 @@ void ACoffeeShopSimCharacter::MoveRight(float Value)
 		AddMovementInput(Direction, Value);
 	}
 
-}
+}*/
 
 void ACoffeeShopSimCharacter::Interact()
 {
@@ -125,7 +146,6 @@ void ACoffeeShopSimCharacter::OnEnterInteractive_Implementation(AActor* Interact
 
 void ACoffeeShopSimCharacter::OnLeaveInteractive_Implementation(class AActor* InteractiveActor)
 {	
-
 	if (InteractiveActor == nullptr)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("[OnLeaveInteractive] InteractiveActor is null"));
@@ -171,9 +191,6 @@ void ACoffeeShopSimCharacter::OnLeaveInteractive_Implementation(class AActor* In
 	{
 		UE_LOG(LogTemp, Warning, TEXT("[OnLeaveInteractive] - END InteractiveList[i]: %s"), *InteractiveList[i]->GetName());
 	}
-
-	//CurrentInteractive = nullptr;
-	//CurrentInteractiveActor = nullptr;
 }
 
 void ACoffeeShopSimCharacter::SetCurrentInteractive(AActor* NewInteractive)

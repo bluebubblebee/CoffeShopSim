@@ -9,13 +9,14 @@ public class CoffeeShopSim : ModuleRules
 		CppStandard = CppStandardVersion.Cpp20;  // Set to C++20
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "NavigationSystem", "AIModule" });
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "NavigationSystem", "AIModule", "EnhancedInput" });
 
         PrivateDependencyModuleNames.AddRange(
             new string[] {
                 "Slate",
                 "SlateCore",
-                "InputCore"
+                "InputCore",
+				"UMG"
             }
         );
     }
