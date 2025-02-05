@@ -30,12 +30,10 @@ private:
 	class USpringArmComponent* CameraBoom;
 
 public:
-
-	//void MoveForward(float Value);
-	//void MoveRight(float Value);
+	
 	void MoveInput(const FVector2D& Value);
 	void Interact();
-
+	
 public:
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Interaction")
@@ -62,8 +60,6 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
 	AActor* CurrentInteractiveActor;
-
-	//IInteractable* CurrentInteractive;	
 
 	void SetCurrentInteractive(AActor* NewInteractive);
 

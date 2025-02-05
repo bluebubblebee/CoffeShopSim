@@ -53,9 +53,11 @@ public:
 	FOnInputControllerChangedDelegate OnInputControllerChanged;
 	
 public:
+	UFUNCTION(BlueprintCallable, Category = "InputControllerComponent")
+	class UInputMappingContext* GetInGameMappingContext();
 
-	FORCEINLINE class UInputMappingContext* GetInGameMappingContext() { return InGameMappingContextDefault; }
-	FORCEINLINE class UInputMappingContext* GetMenuMappingContext() { return MenuMappingContextDefault; }
+	UFUNCTION(BlueprintCallable, Category = "InputControllerComponent")
+	class UInputMappingContext* GetMenuMappingContext();
 
 public:
 	

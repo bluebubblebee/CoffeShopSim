@@ -61,11 +61,20 @@ void UInputControllerComponent::EndPlay(const EEndPlayReason::Type EndPlayReason
 	Super::EndPlay(EndPlayReason);
 }
 
-
 // Called every frame
 void UInputControllerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+}
+
+class UInputMappingContext* UInputControllerComponent::GetInGameMappingContext()
+{
+	return InGameMappingContextDefault;
+}
+
+class UInputMappingContext* UInputControllerComponent::GetMenuMappingContext()
+{
+	return MenuMappingContextDefault;
 }
 
 void UInputControllerComponent::HandleKeyDownEvent(FSlateApplication& SlateApp, const FKeyEvent& InKeyEvent)

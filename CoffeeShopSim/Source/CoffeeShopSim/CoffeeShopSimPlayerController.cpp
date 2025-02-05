@@ -12,7 +12,6 @@ ACoffeeShopSimPlayerController::ACoffeeShopSimPlayerController()
 	bShowMouseCursor = true;
 }
 
-
 void ACoffeeShopSimPlayerController::BeginPlay()
 {
 	APawn* const pawn = GetPawn();
@@ -22,6 +21,11 @@ void ACoffeeShopSimPlayerController::BeginPlay()
 	}
 
 	HUD = Cast<AShopSimHUD>(GetHUD());
+
+	if (HUD != nullptr)
+	{
+		HUD->RegisterSimPlayerController(this);
+	}
 
 	if (!InputControllerComponent->OnInputControllerChanged.IsBound())
 	{
@@ -41,6 +45,11 @@ void ACoffeeShopSimPlayerController::OnControllerChanged(EInputController NewInp
 	{
 		//HUD->OnInputControllerChanged(CurrentInput);
 	}
+}
+
+UInputControllerComponent* ACoffeeShopSimPlayerController::GetTopInputControllerComponentComponent() const
+{
+	return InputControllerComponent;
 }
 
 void ACoffeeShopSimPlayerController::ChangeMappingContextToInGame()
@@ -163,9 +172,12 @@ void ACoffeeShopSimPlayerController::HandleMainMenuButtonInGame()
 	if (HUD->IsOnGameMenu())
 	{
 		HUD->HideMainMenu();
+		ChangeMappingContextToInGame();
 	}
 	else
 	{
+		
 		HUD->ShowMainMenu();
+		ChangeMappingContextToMenu();
 	}	
 }

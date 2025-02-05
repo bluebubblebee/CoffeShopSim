@@ -50,11 +50,13 @@ protected:
     void HandleRightShoulderButtonInGame();
 
     UFUNCTION(BlueprintCallable, Category = "Input")
-    void HandleLeftShoulderButtonInGame();
-
-    
+    void HandleLeftShoulderButtonInGame();    
 
 public:
+	
+	UFUNCTION(BlueprintCallable, Category = "Input")
+	class UInputControllerComponent* GetTopInputControllerComponentComponent() const;
+	
 	UFUNCTION(BlueprintCallable, Category = "Input")
 	void ChangeMappingContextToInGame();
 

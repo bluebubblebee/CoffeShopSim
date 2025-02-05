@@ -42,8 +42,7 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Menu")
 	void HideMainMenu();
 
-public:
-
+public:	
 	void TopFaceButtonPress();
 	void RightFaceButtonPress();
 	void BottomFaceButtonPress();
@@ -51,4 +50,12 @@ public:
 	void RightShoulderButtonPress();
 	void LeftShoulderButtonPress();
 	void NavigateInMenu(EKeyDirection Direction);
+
+public:
+	void RegisterSimPlayerController(ACoffeeShopSimPlayerController* PlayerController);
+
+protected:
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Menu")
+	class ACoffeeShopSimPlayerController* SimPlayerController;
 };

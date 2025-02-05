@@ -1,9 +1,14 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "ShopSimHUD.h"
 #include "CoffeeShopSim/Input/InputNavigationInterface.h"
 #include "Blueprint/UserWidget.h"
+
+void AShopSimHUD::RegisterSimPlayerController(ACoffeeShopSimPlayerController* PlayerController)
+{
+	SimPlayerController = PlayerController;
+}
+
 
 bool AShopSimHUD::IsOnGameMenu()
 {
@@ -124,3 +129,4 @@ void AShopSimHUD::NavigateInMenu(EKeyDirection Direction)
 		IInputNavigationInterface::Execute_OnDirectionNavigation(ActiveGameMenu, Direction);
 	}	
 }
+
