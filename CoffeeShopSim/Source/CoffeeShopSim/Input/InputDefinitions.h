@@ -14,14 +14,6 @@ enum class EInputController : uint8
 };
 
 UENUM(BlueprintType)
-enum class EAxisInputType : uint8
-{
-	VE_NONE			UMETA(DisplayName = "None"),
-	VE_POSITIVE		UMETA(DisplayName = "Positive"),
-	VE_NEGATIVE		UMETA(DisplayName = "Negative")
-};
-
-UENUM(BlueprintType)
 enum class EKeyDirection : uint8
 {
 	VE_UP				UMETA(DisplayName = "Up"),
@@ -37,3 +29,7 @@ public:
 	InputDefinitions();
 	~InputDefinitions();
 };
+
+
+
+

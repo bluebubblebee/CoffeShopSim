@@ -39,15 +39,7 @@ void UInputControllerComponent::BeginPlay()
 		SharedPtrInputProcessor = MakeShareable(new FInputControllerProcessor());
 		SharedPtrInputProcessor->SetController(this);
 		FSlateApplication::Get().RegisterInputPreProcessor(SharedPtrInputProcessor);
-
-		//IPlatformInputDeviceMapper& PlatformInputMapper = IPlatformInputDeviceMapper::Get();
-		//if (!PlatformInputMapper.GetOnInputDeviceConnectionChange().IsBoundToObject(this))
-		//{
-			//PlatformInputMapper.GetOnInputDeviceConnectionChange().AddUObject(this, &UInputControllerComponent::OnControllerConnectionChanged);
-		//}
 	}
-
-	//bHasBeenInitialized = true;
 }
 
 void UInputControllerComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
@@ -56,15 +48,8 @@ void UInputControllerComponent::EndPlay(const EEndPlayReason::Type EndPlayReason
 	{
 		FSlateApplication::Get().UnregisterInputPreProcessor(SharedPtrInputProcessor);
 	}
-
-	//IPlatformInputDeviceMapper::Get().GetOnInputDeviceConnectionChange().RemoveAll(this);
+	
 	Super::EndPlay(EndPlayReason);
-}
-
-// Called every frame
-void UInputControllerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
 
 class UInputMappingContext* UInputControllerComponent::GetInGameMappingContext()

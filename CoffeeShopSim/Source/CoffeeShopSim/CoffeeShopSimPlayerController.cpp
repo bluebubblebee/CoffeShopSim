@@ -47,11 +47,6 @@ void ACoffeeShopSimPlayerController::OnControllerChanged(EInputController NewInp
 	}
 }
 
-UInputControllerComponent* ACoffeeShopSimPlayerController::GetTopInputControllerComponentComponent() const
-{
-	return InputControllerComponent;
-}
-
 void ACoffeeShopSimPlayerController::ChangeMappingContextToInGame()
 {
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());

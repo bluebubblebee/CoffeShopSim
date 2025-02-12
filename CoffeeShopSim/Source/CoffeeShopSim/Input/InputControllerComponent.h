@@ -20,27 +20,22 @@ public:
 
 protected:
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"), Category = "Input")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, Category = "Input")
 	class UInputMappingContext* InGameMappingContextDefault;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"), Category = "Input")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, Category = "Input")
 	class UInputMappingContext* MenuMappingContextDefault;
 
 protected:
 
 	UPROPERTY()
 	class APlayerController* OwnerPlayerController = nullptr;
-
 	TSharedPtr<class FInputControllerProcessor> SharedPtrInputProcessor = nullptr;
 
 protected:
 	virtual void BeginPlay() override;
-	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;	
-
-public:	
-
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+	
 public:
 
 	UPROPERTY(BlueprintReadOnly, Category = "InputControllerComponent")
@@ -59,15 +54,13 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "InputControllerComponent")
 	class UInputMappingContext* GetMenuMappingContext();
 
-public:
-	
+public:	
 	void HandleKeyDownEvent(FSlateApplication& SlateApp, const FKeyEvent& InKeyEvent);
 	void HandleKeyUpEvent(FSlateApplication& SlateApp, const FKeyEvent& InKeyEvent);
 	void HandleMouseMoveEvent(FSlateApplication& SlateApp, const FPointerEvent& MouseEvent);
 	void HandleMouseButtonDownEvent(FSlateApplication& SlateApp, const FPointerEvent& MouseEvent);
 	
-private:
-	
+private:	
 	EInputController GetKeyInputType(const FKey Key);
 	void HandleInputChange(const EInputController NewInput);
 	static bool IsControllerKeyboardMouse(EInputController Controller);

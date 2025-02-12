@@ -16,7 +16,6 @@ public:
 	virtual void BeginPlay() override;
 
 protected:
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	class UInputControllerComponent* InputControllerComponent;
 	
@@ -55,14 +54,10 @@ protected:
 public:
 	
 	UFUNCTION(BlueprintCallable, Category = "Input")
-	class UInputControllerComponent* GetTopInputControllerComponentComponent() const;
-	
-	UFUNCTION(BlueprintCallable, Category = "Input")
 	void ChangeMappingContextToInGame();
 
 	UFUNCTION(BlueprintCallable, Category = "Input")
-	void ChangeMappingContextToMenu();
-	
+	void ChangeMappingContextToMenu();	
 	
 public:
 
