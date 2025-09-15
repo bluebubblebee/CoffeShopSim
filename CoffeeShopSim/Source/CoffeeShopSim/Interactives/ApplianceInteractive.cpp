@@ -2,12 +2,27 @@
 
 
 #include "ApplianceInteractive.h"
+
+#include "CoffeeShopSim/CoffeeShopSim.h"
 #include "CoffeeShopSim/CoffeeShopSimCharacter.h"
 #include "CoffeeShopSim/Shop/ShopManager.h"
+#include "Logging/StructuredLog.h"
 
 void AApplianceInteractive::OnInteract_Implementation()
 {	
 }
+
+void AApplianceInteractive::PoolBeginPlay_Implementation()
+{
+	UE_LOGFMT(LogCoffeeShopSim, Log, "void AApplianceInteractive::PoolBeginPlay_Implementation() called!");	
+}
+
+
+void AApplianceInteractive::PoolEndPlay_Implementation()
+{
+	UE_LOGFMT(LogCoffeeShopSim, Log, "void AApplianceInteractive::PoolEndPlay_Implementation() called!");	
+}
+
 
 bool AApplianceInteractive::TryToSelectRecipe_Implementation()
 {

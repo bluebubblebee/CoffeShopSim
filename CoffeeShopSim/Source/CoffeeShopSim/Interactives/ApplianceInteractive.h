@@ -6,13 +6,14 @@
 #include "BasicInteractive.h"
 #include "Interactable.h"
 #include "CoffeeShopSim/Common/Definitions.h"
+#include "CoffeeShopSim/GameSystems/ActorPoolingInterface.h"
 #include "ApplianceInteractive.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class COFFEESHOPSIM_API AApplianceInteractive : public ABasicInteractive, public IInteractable
+class COFFEESHOPSIM_API AApplianceInteractive : public ABasicInteractive, public IInteractable, public IActorPoolingInterface
 {
 	GENERATED_BODY()
 
@@ -36,6 +37,10 @@ public:
 
 	//Actual implementation of the Interact event
 	void OnInteract_Implementation();
+
+	virtual void PoolBeginPlay_Implementation() override;
+
+	virtual void PoolEndPlay_Implementation() override;
 
 protected:
 

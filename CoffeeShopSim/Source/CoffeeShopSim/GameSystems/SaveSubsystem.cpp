@@ -2,7 +2,10 @@
 
 
 #include "SaveSubsystem.h"
+
+#include "CoffeeShopSim/CoffeeShopSim.h"
 #include "Kismet/GameplayStatics.h"
+#include "Logging/StructuredLog.h"
 
 
 const FString USaveSubsystem::SAVE_DATA = "ShopSimSaveGame_";
@@ -12,8 +15,7 @@ USaveSubsystem::USaveSubsystem()
 
 void USaveSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
-	UE_LOG(LogTemp, Warning, TEXT("[USaveSubsystem::Initialize] Called"));
-
+	UE_LOGFMT(LogCoffeeShopSim, Log, "[USaveSubsystem::Initialize] Called");
 	Super::Initialize(Collection);
 }
 
@@ -67,12 +69,14 @@ void USaveSubsystem::HandleCreateNewGameCompleted(const FString& SlotName, const
 {
 	if (bSuccess)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("[USaveSystemSubsystem::HandleCreateNewGameCompleted] CREATED  %s - UserIndex: %d"), *SlotName, UserIndex);
+		UE_LOGFMT(LogCoffeeShopSim, Log, "[USaveSystemSubsystem::HandleCreateNewGameCompleted] CREATED  {SlotName} - UserIndex: {UserIndex}", SlotName, UserIndex);
+		//UE_LOG(LogTemp, Warning, TEXT("[USaveSystemSubsystem::HandleCreateNewGameCompleted] CREATED  %s - UserIndex: %d"), *SlotName, UserIndex);
 		SaveGameCreatedCompleted.Broadcast(true);
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("[USaveSystemSubsystem::HandleCreateNewGameCompleted] NOT CREATED %s - UserIndex: %d"), *SlotName, UserIndex);
+		UE_LOGFMT(LogCoffeeShopSim, Log, "[USaveSystemSubsystem::HandleCreateNewGameCompleted] NOT CREATED  {SlotName} - UserIndex: {UserIndex}", SlotName, UserIndex);	
+		//UE_LOG(LogTemp, Warning, TEXT("[USaveSystemSubsystem::HandleCreateNewGameCompleted] NOT CREATED %s - UserIndex: %d"), *SlotName, UserIndex);
 		SaveGameCreatedCompleted.Broadcast(false);
 	}
 }
