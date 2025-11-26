@@ -8,7 +8,7 @@ public class CoffeeShopSimEditorTarget : TargetRules
 	public CoffeeShopSimEditorTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Editor;
-        DefaultBuildSettings = BuildSettingsVersion.V5;
+        DefaultBuildSettings = BuildSettingsVersion.V6;
         IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_5;
 		bOverrideBuildEnvironment = true;
         ExtraModuleNames.Add("CoffeeShopSim");

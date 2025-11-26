@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "5.6",
+	"EngineAssociation": "5.7",
 	"Category": "",
 	"Description": "",
 	"Modules": [
@@ -13,12 +13,7 @@
 			]
 		}
 	],
-	"Plugins": [
-		{
-			"Name": "UINavigation",
-			"Enabled": false,
-			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/4601ff4d12fc4ed1a7418e1585374a48"
-		},
+	"Plugins": [		
 		{
 			"Name": "OculusVR",
 			"Enabled": false,
@@ -36,12 +31,7 @@
 				"Win64",
 				"Linux"
 			]
-		},
-		{
-			"Name": "ElectronicNodes",
-			"Enabled": true,
-			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/5cb2a394d0c04e73891762be4cbd7216"
-		},
+		},		
 		{
 			"Name": "MagicLeapMedia",
 			"Enabled": false,
